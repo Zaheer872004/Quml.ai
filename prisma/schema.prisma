@@ -28,6 +28,7 @@ model Recruiter {
   userId     Int     @unique
   user       User    @relation(fields: [userId], references: [id])
   industry    String
+  PhoneNo String
   fieldOfInterest FieldOfInterest
   resume     String  // or CV
   amount     Float?   // or Int if it's a whole number

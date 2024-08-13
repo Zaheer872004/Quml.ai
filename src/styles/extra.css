@@ -1,3 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
 .offcanvas__menu {
   padding-top: 142px;
 }

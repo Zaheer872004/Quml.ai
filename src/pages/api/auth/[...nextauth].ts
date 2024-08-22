@@ -10,11 +10,11 @@ import CredentialsProvider from "next-auth/providers/credentials";
 
 
 import bcrypt from 'bcryptjs'
-import dbConnect from '@/helpers/dbConnect';
+import dbConnect from '../../../helpers/dbConnect';
 import { UserModel } from "../../../models/User";
 import { JWT as NextAuthJWT} from "next-auth/jwt";
 import { Session as NextAuthSession } from 'next-auth';
-import { Role } from "@/types/next-auth";
+import { Role } from '../../../types/next-auth'
 
 
 // User schema or type 

@@ -12,7 +12,7 @@ const About = () => {
   return (
     <div>
       <Head>
-        <title>About</title>
+        <title >About</title>
         <meta name="description" content="About Description" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>

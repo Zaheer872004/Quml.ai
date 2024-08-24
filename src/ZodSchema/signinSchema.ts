@@ -2,7 +2,7 @@ import {z} from 'zod'
 
 // Define the validation schema for sign-in
 export const signinSchema = z.object({
-    email: z
+    identifier: z
         .string()
         .email({ message: "Invalid email address" }),
     password: z

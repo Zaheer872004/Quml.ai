@@ -10,7 +10,13 @@ import DigitalMarketingWorkflow from "@/components/workflow/DigitalMarketingWork
 import DigitalMarketingPrice from "@/components/price/DigitalMarketingPrice";
 import DigitalMarketingBlog from "@/components/blog/DigitalMarketingBlog";
 
+import { useSession, signIn, signOut } from "next-auth/react";
+import { Button } from "@/components/ui/button"
+
+
 export default function DigitalMarketing() {
+  const { data: session } = useSession();
+
   return (
     <div>
       <Head>
@@ -20,6 +26,22 @@ export default function DigitalMarketing() {
       </Head>
       <main>
         <RootLayout header="header1" footer="footer1">
+          {/* Add the Login/Logout buttons */}
+          {/* <div className="flex justify-end top-4 right-4 z-50">
+            {session ? (
+              <Button
+              className='text-black'
+              onClick={() => signOut()}
+              >Button</Button>
+            ) : (
+              <button
+                onClick={() => signIn()}
+                className="bg-blue-500 text-black px-4 py-2 rounded-lg shadow-md hover:bg-blue-600 focus:outline-none"
+              >
+                Login
+              </button>
+            )}
+          </div> */}
           <DigitalMarketingHero />
           <DigitalMarketingBrand />
           <DigitalMarketingAbout />

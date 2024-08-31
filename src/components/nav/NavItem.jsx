@@ -1,8 +1,11 @@
 import Link from "next/link";
 import { useEffect, useRef } from "react";
+import { useSession, signIn, signOut } from "next-auth/react"; // Assuming you're using next-auth
 
 export default function NavItem({ nav, navStyle = "" }) {
+  const { data: session } = useSession();
   const menuAnim = useRef();
+
   useEffect(() => {
     if (menuAnim.current) {
       menuAnimation();
@@ -12,6 +15,7 @@ export default function NavItem({ nav, navStyle = "" }) {
       }, 1000);
     }
   }, []);
+
   const menuAnimation = () => {
     let rootParent = menuAnim.current.children;
     for (let i = 0; i < rootParent.length; i++) {
@@ -19,7 +23,7 @@ export default function NavItem({ nav, navStyle = "" }) {
       let arr = firstParent[0].textContent.split("");
       let spanData = "";
       for (let j = 0; j < arr.length; j++) {
-        if (arr[j] == " ") {
+        if (arr[j] === " ") {
           spanData += `<span style='width:6px;'>${arr[j]}</span>`;
         } else {
           spanData += `<span>${arr[j]}</span>`;
@@ -29,6 +33,7 @@ export default function NavItem({ nav, navStyle = "" }) {
       firstParent[0].innerHTML = result;
     }
   };
+
   return (
     <>
       <div className="header__nav-2">
@@ -52,7 +57,9 @@ export default function NavItem({ nav, navStyle = "" }) {
                             {subEl.data.map((elData, elIndex) => {
                               return (
                                 <li key={elIndex}>
-                                  <Link href={elData.link}>{elData.name}</Link>
+                                  <Link href={elData.link}>
+                                    {elData.name}
+                                  </Link>
                                 </li>
                               );
                             })}
@@ -102,6 +109,30 @@ export default function NavItem({ nav, navStyle = "" }) {
               );
             }
           })}
+
+          {/* Add Signup, Login, and Logout Buttons */}
+          {!session && (
+            <>
+              <li>
+                <button 
+                  onClick={() => signIn()}
+                  className="px-3 py-2  text-black rounded-md"
+                >
+                  Login
+                </button>
+              </li>
+            </>
+          )}
+          {session && (
+            <li>
+              <button 
+                onClick={() => signOut({ callbackUrl: "/sign-in" })}
+                className="px-3 py-2 text-black rounded-md"
+              >
+                Logout
+              </button>
+            </li>
+          )}
         </ul>
       </div>
     </>
